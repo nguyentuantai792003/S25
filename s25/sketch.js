@@ -5,15 +5,15 @@ let value = [
    [0,0,0,0]
 ];
 
+let count;
 let step=0;
-var check1=0,check2=0,check3=0,check4=0;
+var check1=0,check2=0,check3=0;
 
-let button1,button2,button3,button4;
+let button1,button3,button4;
 let started1 = false;
-let started2 = false;
 
-let centreX = [50,150,250,350];
-let centreY = [50,150,250,350];
+let centreX = [50,150,250];
+let centreY = [50,150,250];
 
 function setup() {
   createCanvas(400, 400);
@@ -25,17 +25,13 @@ function menu() {
   textSize(40);
   fill(0);
   text('COINS FLIP',90 ,130);
-  button1 = createButton('Easy');
-  button2 = createButton('Hard');
+  button1 = createButton('Start');
   button3 = createButton('Help');
   button1.size(60, 30);
-  button2.size(60, 30);
   button3.size(60, 30);
-  button1.position(170, 170);
-  button2.position(170, 200);
+  button1.position(170, 190);
   button3.position(170, 230);
   button1.mousePressed(start1);
-  button2.mousePressed(start2);
   button3.mousePressed(start3);
   step--;
   if (button4) button4.hide();
@@ -43,134 +39,19 @@ function menu() {
 
 function start1() {
   button1.hide();
-  button2.hide();
   button3.hide();
   started1 = true;
 }
 
-function start2() {
-  button1.hide();
-  button2.hide();
-  button3.hide();
-  started2 = true;
-}
-
 function start3() {
   button1.hide();
-  button2.hide();
   button3.hide();
   textSize(15);
-  text(' Mỗi thẻ xó hai mặt đen, trắng. Với mỗi lượt đi, bạn sẽ lật\n một thẻ cùng các thẻ xung quanh nó. Bạn thắng khi tất\n cả các thẻ cùng chuyển màu đen trước khi hết số lượt\n quy định.\n                 Easymode: tối đa 3 lượt.\n                 Hardmode: tối đa 4 lượt.',30,200);
+  text(' Mỗi thẻ có hai mặt đen, trắng. Với mỗi lượt đi, bạn sẽ lật\n một thẻ cùng các thẻ xung quanh nó. Bạn thắng khi tất\n cả các thẻ cùng chuyển màu đen trước khi hết 3 lượt.\n Sau khi thua, click để xem lại map. Double click để chơi \n lại\n:',30,200);
   button4 = createButton('Back');
   button4.position(50, 300);
   button4.mousePressed(menu);
   step--;
-}
-
-function draw() {
-  if (started2) {
-  background(205);
-  strokeWeight(2.0);
-  line(0,0,400,0);
-  strokeWeight(1.0);
-  line(0,100,400,100);
-  line(0,200,400,200);
-  line(0,300,400,300);
-  line(0,400,400,400);
-  line(0,0,0,400);
-  line(100,0,100,400);
-  line(200,0,200,400);
-  line(300,0,300,400);
-  line(400,0,400,400);
-  
-  ran();
-  strokeWeight(2.0);
-  for(var i = 0 ; i < 4 ; i++) {
-    for(var j = 0 ; j < 4 ; j++) {
-      fill(value[i][j]);
-      circle(centreX[i],centreY[j],75);
-      noFill();
-    }
-  }
-  ktra2();
-  if(step == 4){
-    background(255, 255, 255);
-    textSize(40);
-    fill(0);
-    textAlign(CENTER);
-    text('YOU LOSE',150,150);
-    textSize(20);
-    textAlign(CENTER);
-    text('Press R to continue',150,200);
-    if(keyIsPressed){
-      ran();
-      step=0;
-      check1=0,check2=0,check3=0,check4=0;
-    }
-  }
-  }
-  
-  if(started1){  
-  background(220);
-  strokeWeight(2.0);
-  line(0,0,300,0);
-  strokeWeight(2.0);
-  line(0,100,300,100);
-  line(0,200,300,200);
-  strokeWeight(2.0);
-  line(0,300,300,300);
-  line(0,0,0,300);
-  strokeWeight(2.0);
-  line(100,0,100,300);
-  line(200,0,200,300);
-  strokeWeight(2.0);
-  line(300,0,300,300);
-  ran();
-  strokeWeight(2.0);
-  fill(value[0][0]);
-  circle(50,50,75);
-  noFill();
-  fill(value[0][1]);
-  circle(50,150,75);
-  noFill();
-  fill(value[0][2]);
-  circle(50,250,75);
-  noFill();
-  fill(value[1][0]);
-  circle(150,50,75);
-  noFill();
-  fill(value[1][1]);
-  circle(150,150,75);
-  noFill();
-  fill(value[1][2]);
-  circle(150,250,75);
-  noFill();
-  fill(value[2][0]);
-  circle(250,50,75);
-  noFill();
-  fill(value[2][1]);
-  circle(250,150,75);
-  noFill();
-  fill(value[2][2]);
-  circle(250,250,75);
-  noFill();
-  ktra1();
-  if(step == 4){
-    background(255, 255, 255);
-    textSize(40);
-    fill(0);
-    textAlign(CENTER);
-    text('YOU LOSE',150,150);
-    textSize(20);
-    textAlign(CENTER);
-    text('Press R to continue',150,200);
-    if(keyIsPressed){
-      ran();
-      step=0;
-      check1=0,check2=0,check3=0;
-    }
-  } 
-  }
 }
 
 function change(i,j){
@@ -181,49 +62,14 @@ function change(i,j){
   }
 }
 
-function ktra2(){
-  let count = 0;
-  for(var i=0; i<4; i++){
-    for(var j=0; j<4; j++){
-      if(value[i][j] == 0){
-        count++;
-      }
-    }
-  }
-  if(count == 16){
-    background(255, 255, 255);
-    textSize(40);
-    fill(random(0,255),random(0,255),random(0,255));
-    textAlign(CENTER);
-    textSize(20);
-    textAlign(CENTER);
-    text('YOU WIN',150,150);
-    text('Press R to continue',150,200);
-    if(keyIsPressed){
-      ran();
-      step=0;
-      check1=0,check2=0,check3=0,check4=0;
-    }
-  }
-  if(count != 16 && step == 4){
-    background(255, 255, 255);
-    textSize(40);
-    fill(0);
-    textAlign(CENTER);
-    text('YOU LOSE',150,150);
-    textSize(20);
-    textAlign(CENTER);
-    text('Press R to continue',150,200);
-    if(keyIsPressed){
-      ran();
-      step=0;
-      check1=0,check2=0,check3=0,check4=0;
-    }
-  }
+function doubleClicked() {
+  ran();
+  step=0;
+  check1=0,check2=0,check3=0;
 }
 
 function ktra1(){
-  let count = 0;
+  count = 0;
   for(var i=0; i<3; i++){
     for(var j=0; j<3; j++){
       if(value[i][j] == 0){
@@ -239,7 +85,7 @@ function ktra1(){
     textSize(20);
     textAlign(CENTER);
     text('YOU WIN',150,150);
-    text('Press R to continue',150,200);
+    text('DOUBLE CLICK to restart',150,200);
     if(keyIsPressed){
       ran();
       step=0;
@@ -254,7 +100,7 @@ function ktra1(){
     text('YOU LOSE',150,150);
     textSize(20);
     textAlign(CENTER);
-    text('Press R to continue',150,200);
+    text('DOUBLE CLICK to restart',150,200);
     if(keyIsPressed){
       ran();
       step=0;
@@ -263,12 +109,11 @@ function ktra1(){
   }
 }
 
-
-function mousePressed() {
+function mouseClicked() {
   step++;
-  for(var i=0; i<4; i++){
-    for(var j=0; j<4; j++){
-      if(centreX[i]-38<=mouseX && mouseX<=centreX[i]+38 && centreY[j]-38<=mouseY && mouseY<=centreY[j]+38){
+  for(var i=0; i<3; i++){
+    for(var j=0; j<3; j++){
+      if(centreX[i]-35<=mouseX && mouseX<=centreX[i]+35 && centreY[j]-35<=mouseY && mouseY<=centreY[j]+35){
         change(i,j);
         if(i == 1){
           change(i+1,j);
@@ -278,10 +123,6 @@ function mousePressed() {
           change(i+1,j);
         }
         if(i == 2){
-          change(i-1,j);
-          change(i+1,j);
-        }
-        if(i == 3){
           change(i-1,j);
         }
         if(j == 1){
@@ -293,10 +134,6 @@ function mousePressed() {
         }
         if(j == 2){
           change(i,j-1);
-          change(i,j+1);
-        }
-        if(j == 3){
-          change(i,j-1);
         }
       }
     }
@@ -305,8 +142,8 @@ function mousePressed() {
 
 function ran() {
   if(check1==0) {
-    var x1 = Math.floor(Math.random() * Math.floor(4));
-    var y1 = Math.floor(Math.random() * Math.floor(4));
+    var x1 = Math.floor(Math.random() * Math.floor(3));
+    var y1 = Math.floor(Math.random() * Math.floor(3));
     if(value[x1][y1] == 0) {
     
     value[x1][y1] = 255;
@@ -326,13 +163,11 @@ function ran() {
   }
   }
   check1=1;
-  
-  
-  
+
   if(check2==0) {
     
-    var x2 = Math.floor(Math.random() * Math.floor(4));
-    var y2 = Math.floor(Math.random() * Math.floor(4));
+    var x2 = Math.floor(Math.random() * Math.floor(3));
+    var y2 = Math.floor(Math.random() * Math.floor(3));
     if(value[x2][y2] == 0) {
     
     value[x2][y2] = 255;
@@ -355,8 +190,8 @@ function ran() {
   
   if(check3==0) {
     
-    var x3 = Math.floor(Math.random() * Math.floor(4));
-    var y3 = Math.floor(Math.random() * Math.floor(4));
+    var x3 = Math.floor(Math.random() * Math.floor(3));
+    var y3 = Math.floor(Math.random() * Math.floor(3));
     if(value[x3][y3] == 0) {
     
       value[x3][y3] = 255;
@@ -376,28 +211,69 @@ function ran() {
     }
   }
   check3=1;
-  
-  if(check4==0) {
-    var x4 = Math.floor(Math.random() * Math.floor(4));
-    var y4 = Math.floor(Math.random() * Math.floor(4));
-    if(value[x4][y4] == 0) {
-    
-      value[x4][y4] = 255;
-    
-      if(0 <= x4 - 1) value[x4 - 1][y4] = 255 - value[x4 - 1][y4];
-      if(0 <= y4 - 1) value[x4][y4 - 1] = 255 - value[x4][y4 - 1];
-      if(x4 + 1 <= 2) value[x4 + 1][y4] = 255 - value[x4 + 1][y4];
-      if(y4 + 1 <= 2) value[x4][y4 + 1] = 255 - value[x4][y4 + 1];
-    }
-    
-    else {
-       value[x4][y4] = 0;
-    
-      if(0 <= x4 - 1) value[x4 - 1][y4] = 255 - value[x4 - 1][y4];
-      if(0 <= y4 - 1) value[x4][y4 - 1] = 255 - value[x4][y4 - 1];
-      if(x4 + 1 <= 2) value[x4 + 1][y4] = 255 - value[x4 + 1][y4];
-      if(y4 + 1 <= 2) value[x4][y4 + 1] = 255 - value[x4][y4 + 1];
-    }
-  }
-  check4=1;
 }
+
+function draw(){
+  if(started1){  
+    background(220);
+    strokeWeight(2.0);
+    line(0,0,300,0);
+    strokeWeight(2.0);
+    line(0,100,300,100);
+    line(0,200,300,200);
+    strokeWeight(2.0);
+    line(0,300,300,300);
+    line(0,0,0,300);
+    strokeWeight(2.0);
+    line(100,0,100,300);
+    line(200,0,200,300);
+    strokeWeight(2.0);
+    line(300,0,300,300);
+    ran();
+    strokeWeight(2.0);
+    fill(value[0][0]);
+    circle(50,50,75);
+    noFill();
+    fill(value[0][1]);
+    circle(50,150,75);
+    noFill();
+    fill(value[0][2]);
+    circle(50,250,75);
+    noFill();
+    fill(value[1][0]);
+    circle(150,50,75);
+    noFill();
+    fill(value[1][1]);
+    circle(150,150,75);
+    noFill();
+    fill(value[1][2]);
+    circle(150,250,75);
+    noFill();
+    fill(value[2][0]);
+    circle(250,50,75);
+    noFill();
+    fill(value[2][1]);
+    circle(250,150,75);
+    noFill();
+    fill(value[2][2]);
+    circle(250,250,75);
+    noFill();
+    ktra1();
+    if(step == 4){
+      background(255, 255, 255);
+      textSize(40);
+      fill(0);
+      textAlign(CENTER);
+      text('YOU LOSE',150,150);
+      textSize(20);
+      textAlign(CENTER);
+      text('DOUBLE CLICK to restart',150,200);
+      if(keyIsPressed){
+        ran();
+        step=0;
+        check1=0,check2=0,check3=0;
+      }
+    } 
+  }
+}
+
