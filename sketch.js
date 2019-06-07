@@ -62,12 +62,13 @@ function start3() {
     button3.hide();
     textSize(23);
     textAlign(CENTER,CENTER);
-    text('Mỗi thẻ có hai mặt đen, trắng. Với mỗi lượt đi, bạn sẽ lật\n     một thẻ cùng các thẻ xung quanh nó. Bạn thắng khi tất\n     cả các thẻ cùng chuyển màu đen trước khi hết 4 lượt.\n Sau khi thua, ấn R để chơi \n lại\n',300,260);
+    text('Mỗi thẻ có hai mặt đen, trắng. Với mỗi lượt đi, bạn sẽ lật\n     một thẻ cùng các thẻ xung quanh nó. Bạn thắng khi tất\n     cả các thẻ cùng chuyển màu đen trước khi hết 4 lượt.\n Ấn R hoặc START để chơi',300,260);
     button4 = createButton('BACK');
     button4.size(90,45);
     button4.position(50, 340);
     button4.mousePressed(menu);
     step = 0;
+    started1 = 0;
 }
 
 function change(i,j) {
@@ -204,6 +205,7 @@ function restart() {
 function draw(){
     if(started1 == true){  
         if(button2) button2.hide();
+        if(button4) button4.hide();
         background(205);
         strokeWeight(2.0);
         line(0,0,600,0);
