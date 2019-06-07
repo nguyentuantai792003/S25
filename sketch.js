@@ -77,8 +77,9 @@ function ktra1(){
         fill(0);
         textAlign(CENTER);
         if(button2) button2.hide();
-        text('       YOU WIN',150,150);
-        text('       Click R to restart',150,200);
+        text('                   YOU WIN',150,150);
+        text('                   Click R to restart',150,200);
+        started1 = false;
     }
 }
 function mouseClicked() {
@@ -193,10 +194,11 @@ function draw(){
                 textSize(20);
                 fill(0);
                 textAlign(CENTER);
-                text('    YOU LOSE',150,150);
+                text('             YOU LOSE',150,150);
                 textSize(20);
                 textAlign(CENTER);
-                text('    Click R to restart',150,200);
+                text('             Click R to restart',150,200);
+                started1 = false;
             }
         }
     }
@@ -206,7 +208,5 @@ function keyTyped() {
   if(key === 'r') {
     restart();
     started1 = true;
-  } else {
-    started1 = false;
   }
 }
